@@ -1,4 +1,4 @@
-package dominio;
+package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -15,6 +15,16 @@ public class Vehiculo {
       validarModelo(modelo);
       validar(matricula);
     }
+
+    public Vehiculo(Vehiculo vehiculo) {
+        if (vehiculo == null) {
+            throw new NullPointerException("No es posible copiar un vehículo nulo.");
+        }
+        this.marca = vehiculo.marca;
+        this.modelo = vehiculo.modelo;
+        this.matricula = vehiculo.matricula;
+    }
+
     public String marca() {return marca;}
 
     public String matricula() {return matricula;}

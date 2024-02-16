@@ -261,7 +261,7 @@ class RevisionesTest {
     void borrarRevisionNulaLanzaExcepcion() {
         assertDoesNotThrow(() -> revisiones.insertar(revision1));
         NullPointerException npe = assertThrows(NullPointerException.class, () -> revisiones.borrar(null));
-        assertEquals("No se puede borrar una revisión nula.", npe.getMessage());
+         assertEquals("No se puede borrar una revisión nula.", npe.getMessage());
     }
 
     @Test

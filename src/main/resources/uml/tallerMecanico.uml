@@ -2161,8 +2161,8 @@
   <standard:Create xmi:id="_jgBioMWLEe6GV74yg1DxAg" base_BehavioralFeature="_jf4_wMWLEe6GV74yg1DxAg"/>
   <Codegen:External xmi:id="_jiF_MMWLEe6GV74yg1DxAg" name="java.lang.Object" base_Classifier="_jh-DYMWLEe6GV74yg1DxAg"/>
   <Codegen:External xmi:id="_rm90kMWLEe6GV74yg1DxAg" name="java.time.format.DateTimeFormatter" base_Classifier="_rm3t8cWLEe6GV74yg1DxAg"/>
-  <Codegen:External xmi:id="_rnD7MMWLEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente" base_Classifier="_jXDz4MWLEe6GV74yg1DxAg"/>
-  <Codegen:External xmi:id="_rnIzsMWLEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo" base_Classifier="_rnFwYMWLEe6GV74yg1DxAg"/>
+  <Codegen:External xmi:id="_rnD7MMWLEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente" base_Classifier="_jXDz4MWLEe6GV74yg1DxAg"/>
+  <Codegen:External xmi:id="_rnIzsMWLEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo" base_Classifier="_rnFwYMWLEe6GV74yg1DxAg"/>
   <Codegen:External xmi:id="_rnOTQMWLEe6GV74yg1DxAg" name="java.time.LocalDate" base_Classifier="_rnKo4MWLEe6GV74yg1DxAg"/>
   <standard:Create xmi:id="_rnWPEMWLEe6GV74yg1DxAg" base_BehavioralFeature="_rnSksMWLEe6GV74yg1DxAg"/>
   <standard:Create xmi:id="_rnex8MWLEe6GV74yg1DxAg" base_BehavioralFeature="_rnbHkMWLEe6GV74yg1DxAg"/>
@@ -2170,12 +2170,12 @@
   <standard:Create xmi:id="__VIoUMWLEe6GV74yg1DxAg" base_BehavioralFeature="__VDv0MWLEe6GV74yg1DxAg"/>
   <record:Record xmi:id="_ickPoMWNEe6GV74yg1DxAg" base_Class="_rnFwYMWLEe6GV74yg1DxAg"/>
   <standard:Create xmi:id="_IS7-4MWOEe6GV74yg1DxAg" base_BehavioralFeature="_IS47kcWOEe6GV74yg1DxAg"/>
-  <Codegen:External xmi:id="_JZmsAMWOEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision" base_Classifier="_rmvyIMWLEe6GV74yg1DxAg"/>
+  <Codegen:External xmi:id="_JZmsAMWOEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision" base_Classifier="_rmvyIMWLEe6GV74yg1DxAg"/>
   <standard:Create xmi:id="_JZrkgMWOEe6GV74yg1DxAg" base_BehavioralFeature="_JZpvUMWOEe6GV74yg1DxAg"/>
   <standard:Create xmi:id="_KW-TMMWOEe6GV74yg1DxAg" base_BehavioralFeature="_KW728MWOEe6GV74yg1DxAg"/>
-  <Codegen:External xmi:id="_qPVWcMWPEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.negocio.Clientes" base_Classifier="_IS2fUMWOEe6GV74yg1DxAg"/>
-  <Codegen:External xmi:id="_qPZn4MWPEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.negocio.Vehiculos" base_Classifier="_KW5asMWOEe6GV74yg1DxAg"/>
-  <Codegen:External xmi:id="_qPcrMMWPEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.negocio.Revisiones" base_Classifier="_JZjosMWOEe6GV74yg1DxAg"/>
+  <Codegen:External xmi:id="_qPVWcMWPEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.org.iesalandalus.programacion.tallermecanico.modelo.negocio.Clientes" base_Classifier="_IS2fUMWOEe6GV74yg1DxAg"/>
+  <Codegen:External xmi:id="_qPZn4MWPEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.org.iesalandalus.programacion.tallermecanico.modelo.negocio.Vehiculos" base_Classifier="_KW5asMWOEe6GV74yg1DxAg"/>
+  <Codegen:External xmi:id="_qPcrMMWPEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.org.iesalandalus.programacion.tallermecanico.modelo.negocio.Revisiones" base_Classifier="_JZjosMWOEe6GV74yg1DxAg"/>
   <standard:Create xmi:id="_qPgVkMWPEe6GV74yg1DxAg" base_BehavioralFeature="_qPd5UMWPEe6GV74yg1DxAg"/>
   <Codegen:External xmi:id="_8zeKkMWQEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.modelo.Modelo" base_Classifier="_qPSTIMWPEe6GV74yg1DxAg"/>
   <Codegen:External xmi:id="_8zh08MWQEe6GV74yg1DxAg" name="org.iesalandalus.programacion.tallermecanico.vista.Vista" base_Classifier="_8zf_xcWQEe6GV74yg1DxAg"/>
