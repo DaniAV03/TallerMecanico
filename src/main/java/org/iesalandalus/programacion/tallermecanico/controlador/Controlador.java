@@ -34,70 +34,48 @@ public class Controlador {
         vista.terminar();
     }
 
-    public void insertar(Cliente cliente) {
-        try {
-            modelo.insertar(cliente);
-        } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-
+    public void insertar(Cliente cliente) throws OperationNotSupportedException {
+        modelo.insertar(cliente);
     }
 
-    public void insertar(Vehiculo vehiculo) {
-        try {
-            modelo.insertar(vehiculo);
-        } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+    public void insertar(Vehiculo vehiculo) throws OperationNotSupportedException {
+        modelo.insertar(vehiculo);
     }
 
-    public void insertar(Revision revision) {
-        try {
-            modelo.insertar(revision);
-        } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+    public void insertar(Revision revision) throws OperationNotSupportedException {
+        modelo.insertar(revision);
     }
 
-    public void buscar(Cliente cliente) {
+    public Cliente buscar(Cliente cliente) {
         modelo.buscar(cliente);
+        return cliente;
     }
 
-    public void buscar(Vehiculo vehiculo) {
+    public Vehiculo buscar(Vehiculo vehiculo) {
         modelo.buscar(vehiculo);
+        return vehiculo;
     }
 
-    public void buscar(Revision revision) {
-        try {
-            modelo.borrar(revision);
-        } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
 
+    public Revision buscar(Revision revision) {
+        return modelo.buscar(revision);
     }
+
 
     public boolean modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
         return modelo.modificar(cliente, nombre, telefono);
     }
 
-    public void anadirHoras(Revision revision, int horas) {
-        try {
-            modelo.anadirHoras(revision, horas);
-        } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+    public void anadirHoras(Revision revision, int horas) throws OperationNotSupportedException {
+        modelo.anadirHoras(revision, horas);
     }
 
     public void anadirPrecioMaterial(Revision revision, float precioMaterial) throws OperationNotSupportedException {
         modelo.anadirPrecioMaterial(revision, precioMaterial);
     }
 
-    public void cerrar(Revision revision, LocalDate fechaFin) {
-        try {
-            modelo.cerrar(revision, fechaFin);
-        } catch (OperationNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
+    public void cerrar(Revision revision, LocalDate fechaFin) throws OperationNotSupportedException {
+        modelo.cerrar(revision, fechaFin);
     }
 
     public void borrar(Cliente cliente) throws OperationNotSupportedException {

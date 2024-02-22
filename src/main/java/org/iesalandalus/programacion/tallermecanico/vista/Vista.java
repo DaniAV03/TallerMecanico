@@ -3,9 +3,11 @@ package org.iesalandalus.programacion.tallermecanico.vista;
 import org.iesalandalus.programacion.tallermecanico.controlador.Controlador;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
+import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Vehiculo;
 
 import javax.naming.OperationNotSupportedException;
-import java.time.LocalDate;
+
+import java.util.List;
 import java.util.Objects;
 
 public class Vista {
@@ -17,12 +19,13 @@ public class Vista {
     }
 
     public void comenzar() throws OperationNotSupportedException {
-        Opcion opcion = null;
-        while (opcion != Opcion.SALIR) {
+        Opcion opcion;
+        do {
             Consola.mostrarMenu();
             opcion = Consola.elegirOpcion();
             ejecutar(opcion);
-        }
+        } while (opcion != Opcion.SALIR);
+        controlador.terminar();
     }
 
     public void terminar() {
@@ -46,98 +49,151 @@ public class Vista {
             case LISTAR_REVISIONES -> listarRevisiones();
             case LISTAR_REVISIONES_CLIENTES -> listarRevisionesCliente();
             case LISTAR_REVISIONES_VEHICULOS -> listarRevisionesVehiculo();
-            case ANADIR_HORAS_REVISION -> anadirHorasRevision();
+            case ANADIR_HORAS_REVISION -> anadirHoras();
             case ANADIR_PRECIO_MATERIAL_REVISON -> anadirPrecioMaterial();
             case CERRAR_REVISION -> cerrarRevision();
             case SALIR -> salir();
         }
     }
 
+
     private void insertarCliente() {
+        Consola.mostrarCabecera("Insertar Cliente");
         controlador.insertar(Consola.leerCliente());
+        System.out.println("Cliente insertado correctamente.");
     }
 
     private void insertarVehiculo() {
+        Consola.mostrarCabecera("Insertar Vehículo");
         controlador.insertar(Consola.leerVehiculo());
+        System.out.println("Vehículo insertado correctamente.");
     }
 
-    private void insertarRevision() {
+    private void insertarRevision()  {
+        Consola.mostrarCabecera("Insertar Revisión");
         controlador.insertar(Consola.leerRevision());
+        System.out.println("Revisión insertada correctamente.");
     }
 
     private void buscarCliente() {
-        controlador.buscar(Consola.leerCliente());
+        Consola.mostrarCabecera("Buscar cliente");
+        Cliente cliente = controlador.buscar(Consola.leerClienteDni());
+        System.out.println((cliente != null) ? cliente : "No existe ningún cliente con dicho DNI.");
     }
 
     private void buscarVehiculo() {
-        controlador.buscar(Consola.leerVehiculo());
+        Consola.mostrarCabecera("Buscar Vehículo");
+        Vehiculo vehiculo = controlador.buscar(Consola.leerMatriculaVehiculo());
+        System.out.println((vehiculo != null) ? vehiculo : "No existe ningún vehículo con dicha matrícula.");
     }
 
     private void buscarRevision() {
-        controlador.buscar(Consola.leerRevision());
+        Consola.mostrarCabecera("Buscar Revisión");
+        Revision revision = controlador.buscar(Consola.leerRevision());
+        System.out.println((revision != null) ? revision : "No existe ninguna revisión para ese cliente, vehículo y fecha.");
     }
 
-    private void modificarCliente() {
-        try {
-            Cliente dni = Consola.leerClienteDni();
-            String nuevoNombre = Consola.leerNuevoNombre();
-            String nuevoTelefono = Consola.leerNuevoTelefono();
-            controlador.modificar(dni, nuevoNombre, nuevoTelefono);
-        } catch (OperationNotSupportedException ex) {
-            System.out.println("Error al intentar modificar el cliente: " + ex.getMessage());
-        }
+    private void modificarCliente() throws OperationNotSupportedException {
+        Consola.mostrarCabecera("Modificar Cliente");
+        boolean modificado = controlador.modificar(Consola.leerClienteDni(), Consola.leerNuevoNombre(), Consola.leerNuevoTelefono());
+        System.out.println((modificado) ? "El cliente se ha modificado correctamente." : "El cliente no se ha modificado.");
     }
 
-    private void anadirHorasRevision() {
+    private void anadirHoras() {
+        Consola.mostrarCabecera("Añadir Horas Revisión");
         controlador.anadirHoras(Consola.leerRevision(), Consola.leerHoras());
+        System.out.println("Horas añadidas correctamente.");
     }
 
-    private void anadirPrecioMaterial() {
-        try {
-            Revision revision = Consola.leerRevision();
-            float precioMaterial = Consola.leerPrecioMaterial();
-            controlador.anadirPrecioMaterial(revision, precioMaterial);
-        } catch (OperationNotSupportedException ex) {
-            System.out.println("Error al intentar añadir el precio del material a la revisión: " + ex.getMessage());
-        }
+
+    private void anadirPrecioMaterial() throws OperationNotSupportedException {
+        Consola.mostrarCabecera("Añadir Precio Material Revisión");
+        controlador.anadirPrecioMaterial(Consola.leerRevision(), Consola.leerPrecioMaterial());
+        System.out.println("Precio material añadido correctamente.");
     }
 
     private void cerrarRevision() {
-        Revision revision = Consola.leerRevision();
-        LocalDate fechaFin = Consola.leerFechaFin();
-        controlador.cerrar(revision, fechaFin);
+        Consola.mostrarCabecera("Cerrar Revisión");
+        controlador.cerrar(Consola.leerRevision(), Consola.leerFechaFin());
+        System.out.println("Revisión cerrada correctamente.");
     }
 
     private void borrarCliente() throws OperationNotSupportedException {
-        controlador.borrar(Consola.leerCliente());
+        Consola.mostrarCabecera("Borrar Cliente");
+        controlador.borrar(Consola.leerClienteDni());
+        System.out.println("Cliente borrado correctamente.");
     }
 
     private void borrarVehiculo() throws OperationNotSupportedException {
-        controlador.borrar(Consola.leerVehiculo());
+        Consola.mostrarCabecera("Borrar Vehículo");
+        controlador.borrar(Consola.leerMatriculaVehiculo());
+        System.out.println("Vehículo borrado correctamente.");
     }
 
     private void borrarRevision() throws OperationNotSupportedException {
+        Consola.mostrarCabecera("Borrar Revisión");
         controlador.borrar(Consola.leerRevision());
+        System.out.println("Revisión borrada correctamente.");
     }
 
     private void listarClientes() {
-        controlador.getClientes();
+        Consola.mostrarCabecera("Listar Clientes");
+        List<Cliente> clientes = controlador.getClientes();
+        if (!clientes.isEmpty()) {
+            for (Cliente cliente : clientes) {
+                System.out.println(cliente);
+            }
+        } else {
+            System.out.println("No hay clientes que mostrar.");
+        }
     }
 
     private void listarVehiculos() {
-        controlador.getVehiculos();
+        Consola.mostrarCabecera("Listar Vehículos");
+        List<Vehiculo> vehiculos = controlador.getVehiculos();
+        if (!vehiculos.isEmpty()) {
+            for (Vehiculo vehiculo : vehiculos) {
+                System.out.println(vehiculo);
+            }
+        } else {
+            System.out.println("No hay vehículos que mostrar.");
+        }
     }
 
     private void listarRevisiones() {
-        controlador.getRevisiones();
+        Consola.mostrarCabecera("Listar Revisiones");
+        List<Revision> revisiones = controlador.getRevisiones();
+        if (!revisiones.isEmpty()) {
+            for (Revision revision : revisiones) {
+                System.out.println(revision);
+            }
+        } else {
+            System.out.println("No hay revisiones que mostrar.");
+        }
     }
 
     public void listarRevisionesCliente() {
-        controlador.getRevisiones(Consola.leerCliente());
+        Consola.mostrarCabecera("Listar Revisiones Cliente");
+        List<Revision> revisionesCliente = controlador.getRevisiones(Consola.leerClienteDni());
+        if (!revisionesCliente.isEmpty()) {
+            for (Revision revision : revisionesCliente) {
+                System.out.println(revision);
+            }
+        } else {
+            System.out.println("No hay revisiones que mostrar para dicho cliente.");
+        }
     }
 
     public void listarRevisionesVehiculo() {
-        controlador.getRevisiones(Consola.leerVehiculo());
+        Consola.mostrarCabecera("Listar Revisiones Vehículo");
+        List<Revision> revisionesVehiculo = controlador.getRevisiones(Consola.leerMatriculaVehiculo());
+        if (!revisionesVehiculo.isEmpty()) {
+            for (Revision revision : revisionesVehiculo) {
+                System.out.println(revision);
+            }
+        } else {
+            System.out.println("No hay revisiones que mostrar para dicho vehículo.");
+        }
     }
 
     private void salir() {
