@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class Vehiculo {
     private static final String ER_MARCA = "[A-Z]+[a-z]*([ -]?[A-Z][a-z]+)*";
-    private static final String ER_MATRICULA = "\\d{4}[QWRTYPSDFGHJKLZCVBNM]{3}";
+    private static final String ER_MATRICULA = "^\\d{4}[BCDFGHJKLMNPRSTVWXYZ]{3}$";
     private String marca;
     private String modelo;
     private String matricula;
