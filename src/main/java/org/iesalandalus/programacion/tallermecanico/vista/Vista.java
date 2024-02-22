@@ -57,19 +57,19 @@ public class Vista {
     }
 
 
-    private void insertarCliente() {
+    private void insertarCliente() throws OperationNotSupportedException {
         Consola.mostrarCabecera("Insertar Cliente");
         controlador.insertar(Consola.leerCliente());
         System.out.println("Cliente insertado correctamente.");
     }
 
-    private void insertarVehiculo() {
+    private void insertarVehiculo() throws OperationNotSupportedException {
         Consola.mostrarCabecera("Insertar Vehículo");
         controlador.insertar(Consola.leerVehiculo());
         System.out.println("Vehículo insertado correctamente.");
     }
 
-    private void insertarRevision()  {
+    private void insertarRevision() throws OperationNotSupportedException {
         Consola.mostrarCabecera("Insertar Revisión");
         controlador.insertar(Consola.leerRevision());
         System.out.println("Revisión insertada correctamente.");
@@ -99,7 +99,7 @@ public class Vista {
         System.out.println((modificado) ? "El cliente se ha modificado correctamente." : "El cliente no se ha modificado.");
     }
 
-    private void anadirHoras() {
+    private void anadirHoras() throws OperationNotSupportedException {
         Consola.mostrarCabecera("Añadir Horas Revisión");
         controlador.anadirHoras(Consola.leerRevision(), Consola.leerHoras());
         System.out.println("Horas añadidas correctamente.");
@@ -112,7 +112,7 @@ public class Vista {
         System.out.println("Precio material añadido correctamente.");
     }
 
-    private void cerrarRevision() {
+    private void cerrarRevision() throws OperationNotSupportedException {
         Consola.mostrarCabecera("Cerrar Revisión");
         controlador.cerrar(Consola.leerRevision(), Consola.leerFechaFin());
         System.out.println("Revisión cerrada correctamente.");
