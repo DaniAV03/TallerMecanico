@@ -12,7 +12,7 @@ public enum Opcion {
     MODIFICAR_CLIENTE("Modificar los  Clientes", 5),
     INSERTAR_VEHICULO("Insertar el vehiculo", 6),
     BUSCAR_VEHICULO("Buscar el vehiculo", 7),
-    BORRAR_VEHICULO("Insertar el  vehiculo", 8),
+    BORRAR_VEHICULO("Borrar el  vehiculo", 8),
     LISTAR_VEHICULOS("Listar los vehiculos", 9),
     INSERTAR_REVISION("Insertar la revision", 10),
     BUSCAR_REVISION("Buscar la revision", 11),
@@ -55,6 +55,6 @@ public enum Opcion {
 
     @Override
     public String toString() {
-        return String.format("%s (%s)", this.nombre, this.numeroEscogido);
+        return String.format("%s = %s", this.nombre, this.numeroEscogido);
     }
 }

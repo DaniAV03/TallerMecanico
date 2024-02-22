@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class Controlador {
-    private Modelo modelo;
-    private Vista vista;
+    private final Modelo modelo;
+    private final Vista vista;
 
     public Controlador(Modelo modelo, Vista vista) {
-        Objects.requireNonNull(modelo, "El modelo nulo.");
-        Objects.requireNonNull(vista, "La vista nula.");
+        Objects.requireNonNull(modelo, "ERROR: El modelo no puede ser nulo.");
+        Objects.requireNonNull(vista, "ERROR: La vista no puede ser nula.");
         this.modelo = modelo;
         this.vista = vista;
-        vista.setControlador(this);
+        this.vista.setControlador(this);
     }
 
     public void comenzar() throws OperationNotSupportedException {
@@ -47,20 +47,16 @@ public class Controlador {
     }
 
     public Cliente buscar(Cliente cliente) {
-        modelo.buscar(cliente);
-        return cliente;
+        return modelo.buscar(cliente);
     }
 
     public Vehiculo buscar(Vehiculo vehiculo) {
-        modelo.buscar(vehiculo);
-        return vehiculo;
+        return modelo.buscar(vehiculo);
     }
-
 
     public Revision buscar(Revision revision) {
         return modelo.buscar(revision);
     }
-
 
     public boolean modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
         return modelo.modificar(cliente, nombre, telefono);
@@ -80,7 +76,6 @@ public class Controlador {
 
     public void borrar(Cliente cliente) throws OperationNotSupportedException {
         modelo.borrar(cliente);
-
     }
 
     public void borrar(Vehiculo vehiculo) throws OperationNotSupportedException {
@@ -92,7 +87,6 @@ public class Controlador {
     }
 
     public List<Cliente> getClientes() {
-
         return modelo.getClientes();
     }
 
@@ -111,6 +105,5 @@ public class Controlador {
     public List<Revision> getRevisiones(Vehiculo vehiculo) {
         return modelo.getRevisiones(vehiculo);
     }
-
 
 }

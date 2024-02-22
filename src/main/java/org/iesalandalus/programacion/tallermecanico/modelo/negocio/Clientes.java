@@ -9,54 +9,57 @@ import java.util.List;
 import java.util.Objects;
 
 public class Clientes {
-    private final List<Cliente> listaClientes;
+
+    private final List<Cliente> coleccionClientes;
 
     public Clientes() {
-        listaClientes = new ArrayList<>();
+        coleccionClientes = new ArrayList<>();
     }
 
     public List<Cliente> get() {
-        return new ArrayList<>(listaClientes);
+        return new ArrayList<>(coleccionClientes);
     }
 
     public void insertar(Cliente cliente) throws OperationNotSupportedException {
-        Objects.requireNonNull(cliente,"No se puede insertar un cliente nulo.");
-        if (listaClientes.contains(cliente)) {
+        Objects.requireNonNull(cliente, "No se puede insertar un cliente nulo.");
+        if (coleccionClientes.contains(cliente)) {
             throw new OperationNotSupportedException("Ya existe un cliente con ese DNI.");
         }
-        listaClientes.add(cliente);
+        coleccionClientes.add(cliente);
     }
 
-    public boolean modificar(Cliente cliente, String nuevoNombre, String nuevoTelefono) throws OperationNotSupportedException {
-        Objects.requireNonNull(cliente,"No se puede modificar un cliente nulo.");
-        if ( !listaClientes.contains(cliente)) {
+    public boolean modificar(Cliente cliente, String nombre, String telefono) throws OperationNotSupportedException {
+        Objects.requireNonNull(cliente, "No se puede modificar un cliente nulo.");
+        Cliente clienteEncontrado = buscar(cliente);
+        if (clienteEncontrado == null) {
             throw new OperationNotSupportedException("No existe ningún cliente con ese DNI.");
         }
-        int index = listaClientes.indexOf(cliente);
-        if (nuevoNombre != null) {
-            cliente.setNombre(nuevoNombre);
+        boolean modificado = false;
+        if (nombre != null && !nombre.isBlank()) {
+            clienteEncontrado.setNombre(nombre);
+            modificado = true;
         }
-        if (nuevoTelefono != null) {
-            cliente.setTelefono(nuevoTelefono);
+        if (telefono != null && !telefono.isBlank()) {
+            clienteEncontrado.setTelefono(telefono);
+            modificado = true;
         }
-        return listaClientes.set(index, cliente) != null;
+        return modificado;
     }
+
     public Cliente buscar(Cliente cliente) {
         Objects.requireNonNull(cliente, "No se puede buscar un cliente nulo.");
-        int index = listaClientes.indexOf(cliente);
-        if (index != -1) {
-            return listaClientes.get(index);
-        }
-
-       else return null;
+        int indice = coleccionClientes.indexOf(cliente);
+        return (indice == -1) ? null : coleccionClientes.get(indice);
     }
+
     public void borrar(Cliente cliente) throws OperationNotSupportedException {
-        Objects.requireNonNull(cliente,"No se puede borrar un cliente nulo.");
-        if (!listaClientes.contains(cliente)) {
+        Objects.requireNonNull(cliente, "No se puede borrar un cliente nulo.");
+        if (!coleccionClientes.contains(cliente)) {
             throw new OperationNotSupportedException("No existe ningún cliente con ese DNI.");
         }
-        listaClientes.remove(cliente);
+        coleccionClientes.remove(cliente);
     }
+
 }
 
 

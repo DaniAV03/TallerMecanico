@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class Consola {
-    private static final String EXPRESION_REGULAR_FECHA = "dd/MM/YYYY";
+    private static final String EXPRESION_REGULAR_FECHA = "dd/MM/yyyy";
 
     public Consola() {
     }
@@ -23,9 +23,9 @@ public class Consola {
     }
 
     public static void mostrarMenu() {
-        mostrarCabecera("Gestión de un taller mecánico.");
+        mostrarCabecera("Taller mecánico.");
         for (Opcion opcion : Opcion.values()) {
-            System.out.print(opcion);
+            System.out.println(opcion);
         }
     }
 
@@ -93,10 +93,10 @@ public class Consola {
     public static Vehiculo leerVehiculo() {
         System.out.println("Dime la marca.");
         String marca = Entrada.cadena();
-        System.out.println("Dime la matrícula.");
-        String matricula = Entrada.cadena();
         System.out.println("Dime el modelo.");
         String modelo = Entrada.cadena();
+        System.out.println("Dime la matrícula.");
+        String matricula = Entrada.cadena();
         return new Vehiculo(marca, modelo, matricula);
     }
 
