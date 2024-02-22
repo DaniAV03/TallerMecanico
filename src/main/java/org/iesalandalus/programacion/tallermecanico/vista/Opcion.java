@@ -55,6 +55,6 @@ public enum Opcion {
 
     @Override
     public String toString() {
-        return String.format("nombre=%s, numeroOpcion=%s", this.nombre, this.numeroEscogido);
+        return String.format("%s (%s)", this.nombre, this.numeroEscogido);
     }
 }

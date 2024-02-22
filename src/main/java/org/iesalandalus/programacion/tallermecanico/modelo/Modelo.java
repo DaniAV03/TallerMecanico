@@ -16,6 +16,7 @@ public class Modelo {
     Clientes clientes;
     Vehiculos vehiculos;
     Revisiones revisiones;
+    public Modelo(){}
    public void comenzar() {
         clientes = new Clientes();
         vehiculos = new Vehiculos();

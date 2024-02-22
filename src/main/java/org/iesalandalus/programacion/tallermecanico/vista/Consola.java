@@ -75,11 +75,11 @@ public class Consola {
     }
 
     public static String leerNuevoNombre() {
-        return leerCadena("Dime el nuevo nombre.");
+        return leerCadena("Dime el nombre.");
     }
 
     public static String leerNuevoTelefono() {
-        return leerCadena("Dime el nuevo teléfono.");
+        return leerCadena("Dime el teléfono.");
     }
 
     public static Vehiculo leerVehiculo() {
