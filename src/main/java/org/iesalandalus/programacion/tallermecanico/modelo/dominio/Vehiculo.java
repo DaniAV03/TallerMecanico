@@ -80,7 +80,7 @@ public class Vehiculo {
     }
     @Override
     public String toString() {
-        return String.format("%s %s - (%s)", this.marca, this.modelo, this.matricula);
+        return String.format("%s %s - %s", this.marca, this.modelo, this.matricula);
     }
 
 

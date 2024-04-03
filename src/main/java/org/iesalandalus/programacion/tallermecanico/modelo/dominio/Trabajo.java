@@ -8,12 +8,12 @@ import java.util.Objects;
 
 public abstract class Trabajo {
     public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static final float PRECIO_DIA = 10;
-    protected LocalDate fechaInicio;
-    protected LocalDate fechafin;
+    private static final float FACTOR_DIA = 10;
+    protected static LocalDate fechaInicio;
+    LocalDate fechafin;
     protected int horas;
-    protected Cliente cliente;
-    protected Vehiculo vehiculo;
+    protected static Cliente cliente;
+    protected static Vehiculo vehiculo;
     protected Trabajo(Cliente cliente,Vehiculo vehiculo, LocalDate fechaInicio){
         setCliente(cliente);
         setVehiculo(vehiculo);
@@ -27,26 +27,23 @@ public abstract class Trabajo {
         this.fechafin = trabajo.fechafin;
         this.horas = trabajo.horas;
     }
-
-
-
-
-    public static Trabajo copiar (Trabajo trabajo){
-        Objects.requireNonNull(trabajo,"El trabajo no puede ser nulo.");
-        if(trabajo instanceof Revision){
+    public static Trabajo copiar(Trabajo trabajo) {
+        if (trabajo instanceof Revision) {
             return new Revision((Revision) trabajo);
-        }else if (trabajo instanceof  Mecanico){
-            return  new Mecanico((Mecanico) trabajo);
-        }else throw new IllegalArgumentException("Error al copiar el trabajo.");
+        } else if (trabajo instanceof Mecanico) {
+            return new Mecanico((Mecanico) trabajo);
+        } else {
+            throw new NullPointerException("El trabajo no puede ser nulo.");
+        }
     }
-    public static Trabajo get (Vehiculo vehiculo){
-
+    public static Trabajo get(Vehiculo vehiculo) {
+      return new Revision(new Cliente("Dani","07643836F","651179397"),vehiculo,LocalDate.now());
     }
     public Cliente getCliente() {
         return cliente;
     }
 
-    protected void setCliente(Cliente cliente) {
+    private void setCliente(Cliente cliente) {
         Objects.requireNonNull(cliente, "El cliente no puede ser nulo.");
         this.cliente = cliente;
     }
@@ -55,7 +52,7 @@ public abstract class Trabajo {
         return vehiculo;
     }
 
-    protected void setVehiculo(Vehiculo vehiculo) {
+    private void setVehiculo(Vehiculo vehiculo) {
         Objects.requireNonNull(vehiculo, "El vehículo no puede ser nulo.");
         this.vehiculo = vehiculo;
     }
@@ -64,7 +61,7 @@ public abstract class Trabajo {
         return fechaInicio;
     }
 
-    protected void setFechaInicio(LocalDate fechaInicio) {
+    private void setFechaInicio(LocalDate fechaInicio) {
         Objects.requireNonNull(fechaInicio, "La fecha de inicio no puede ser nula.");
         if (fechaInicio.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser futura.");
@@ -93,42 +90,42 @@ public abstract class Trabajo {
     public void anadirHoras(int horas) throws OperationNotSupportedException {
         if (horas <= 0)
             throw new IllegalArgumentException("Las horas a añadir deben ser mayores que cero.");
-        if (estaCerrada())
-            throw new OperationNotSupportedException("No se puede añadir horas, ya que la revisión está cerrada.");
+        if (estaCerrado())
+            throw new OperationNotSupportedException("No se puede añadir horas, ya que el trabajo está cerrado.");
         this.horas += horas;
     }
-
-    public float getPrecio() {
-        float precioTotalHoras = horas * Revision.PRECIO_HORA;
-        float precioTotalDias = getDias() >= 1 ? (getDias()) * PRECIO_DIA : 0;
-        return (float) (precioTotalHoras + precioTotalDias + precioMaterial * Revision.PRECIO_MATERIAL);
-    }
-
-    private float getDias() {
-        return fechafin != null ? ChronoUnit.DAYS.between(fechaInicio, fechafin) : 0;
+    public boolean estaCerrado() {
+        return fechafin != null;
     }
 
     public void cerrar(LocalDate fechaFin) throws OperationNotSupportedException {
         if (this.fechafin != null) {
-            throw new OperationNotSupportedException("La revisión ya está cerrada.");
+            throw new OperationNotSupportedException("El trabajo ya está cerrado.");
         }
         setFechafin(fechaFin);
     }
+    public float getPrecio() {
+        return getPrecioEspecifico()+getPrecioFijo();
 
-    public boolean estaCerrada() {
-        return fechafin != null;
     }
+    public float getPrecioFijo() {
+        return getDias()*FACTOR_DIA;
+    }
+    private float getDias() {
+        return fechafin != null ? ChronoUnit.DAYS.between(fechaInicio, fechafin) : 0;
+    }
+
+    public abstract float getPrecioEspecifico();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Revision revision = (Revision) o;
-        return Objects.equals(fechaInicio, revision.fechaInicio) && Objects.equals(cliente, revision.cliente) && Objects.equals(vehiculo, revision.vehiculo);
+        Trabajo trabajo = (Trabajo) o;
+        return horas == trabajo.horas && Objects.equals(cliente, trabajo.cliente) && Objects.equals(vehiculo,trabajo.vehiculo) && Objects.equals(fechaInicio, trabajo.fechaInicio);
     }
-
     @Override
     public int hashCode() {
-        return Objects.hash(fechaInicio, cliente, vehiculo);
+        return Objects.hash( cliente,vehiculo,fechaInicio);
     }
 }
