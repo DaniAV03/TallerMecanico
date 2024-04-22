@@ -1,36 +1,32 @@
 package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
+
 import java.time.LocalDate;
 
-
 public class Revision extends Trabajo {
-  private static final float FACTOR_HORA = 35f;
+
+  private static final float FACTOR_HORA = 35F;
 
   public Revision(Cliente cliente, Vehiculo vehiculo, LocalDate fechaInicio) {
-    super(cliente,vehiculo,fechaInicio);
-  }
-
-
-  public float getPrecioEspecifico() {
-    return horas * FACTOR_HORA;
+    super(cliente, vehiculo, fechaInicio);
   }
 
   public Revision(Revision revision) {
-    super(Trabajo.cliente,Trabajo.vehiculo,Trabajo.fechaInicio);
-    if (revision == null) {
-      throw new NullPointerException("El trabajo no puede ser nulo.");
-    }
-    this.cliente = new Cliente(revision.cliente);
-    this.fechafin = revision.fechafin;
-    this.horas = revision.horas;
+    super(revision);
   }
+
+  @Override
+  public float getPrecioEspecifico() {
+    return (estaCerrado()) ? FACTOR_HORA * getHoras() : 0;
+  }
+
   @Override
   public String toString() {
-    String fechaInicioString = fechaInicio != null ? fechaInicio.format(Revision.FORMATO_FECHA) : "";
-    String fechaFinString = fechafin != null ? fechafin.format(Revision.FORMATO_FECHA) : "";
-    String horasString = String.valueOf(horas);
-    String precioString = getPrecio() != 0.0 ? String.format(", %.2f € total", getPrecio()) : "";
-    return "Revisión -> " + cliente + " - " + vehiculo + " (" + fechaInicioString + " - " + fechaFinString + "): " +
-            horasString + " horas" + precioString;
+    String cadena;
+    if (!estaCerrado()) {
+      cadena = String.format("Revisión -> %s - %s (%s - ): %d horas", getCliente(), getVehiculo(), getFechaInicio().format(FORMATO_FECHA), getHoras());
+    } else {
+      cadena = String.format("Revisión -> %s - %s (%s - %s): %d horas, %.2f € total", getCliente(), getVehiculo(), getFechaInicio().format(FORMATO_FECHA), getFechaFin().format(FORMATO_FECHA), getHoras(), getPrecio());
+    }
+    return cadena;
   }
 }
-

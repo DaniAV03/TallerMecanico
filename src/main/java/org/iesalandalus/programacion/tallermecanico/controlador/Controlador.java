@@ -1,11 +1,11 @@
 package org.iesalandalus.programacion.tallermecanico.controlador;
 
+import org.iesalandalus.programacion.tallermecanico.modelo.FabricaModelo;
 import org.iesalandalus.programacion.tallermecanico.modelo.Modelo;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Mecanico;
-import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Revision;
+import org.iesalandalus.programacion.tallermecanico.modelo.negocio.FabricaFuenteDatos;
+import org.iesalandalus.programacion.tallermecanico.vista.FabricaVista;
 import org.iesalandalus.programacion.tallermecanico.vista.Vista;
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
-import org.iesalandalus.programacion.tallermecanico.vista.eventos.ReceptorEventos;
 
 import java.util.Objects;
 
@@ -14,11 +14,12 @@ public class Controlador implements IControlador {
     private final Modelo modelo;
     private final Vista vista;
 
-    public Controlador(Modelo modelo, Vista vista) {
-        Objects.requireNonNull(modelo, "ERROR: El modelo no puede ser nulo.");
-        Objects.requireNonNull(vista, "ERROR: La vista no puede ser nula.");
-        this.modelo = modelo;
-        this.vista = vista;
+    public Controlador(FabricaModelo fabricaModelo, FabricaFuenteDatos fabricaFuenteDatos, FabricaVista fabricaVista) {
+        Objects.requireNonNull(fabricaModelo, "ERROR: La fábrica del modelo no puede ser nula.");
+        Objects.requireNonNull(fabricaFuenteDatos, "ERROR: La fábrica de la fuente de datos no puede ser nula.");
+        Objects.requireNonNull(fabricaVista, "ERROR: La fábrica de la vista no puede ser nula.");
+        this.modelo = fabricaModelo.crear(fabricaFuenteDatos);
+        this.vista = fabricaVista.crear();
         this.vista.getGestorEventos().suscribir(this, Evento.values());
     }
 
@@ -56,8 +57,9 @@ public class Controlador implements IControlador {
                 case LISTAR_CLIENTES -> vista.mostrarClientes(modelo.getClientes());
                 case LISTAR_VEHICULOS -> vista.mostrarVehiculos(modelo.getVehiculos());
                 case LISTAR_TRABAJOS -> vista.mostrarTrabajos(modelo.getTrabajos());
-                case LISTAR_TRABAJOS_CLIENTE -> vista.mostrarTrabajosCliente(modelo.getTrabajos(vista.leerClienteDni()));
-                case LISTAR_TRABAJOS_VEHICULO -> vista.mostrarTrabajosVehiculo(modelo.getTrabajos(vista.leerVehiculoMatricula()));
+                case LISTAR_TRABAJOS_CLIENTE -> vista.mostrarTrabajos(modelo.getTrabajos(vista.leerClienteDni()));
+                case LISTAR_TRABAJOS_VEHICULO -> vista.mostrarTrabajos(modelo.getTrabajos(vista.leerVehiculoMatricula()));
+                case MOSTRAR_ESTADISTICAS_MENSUALES -> vista.mostrarEstadisticasMensuales(modelo.getEstadisticasMensuales(vista.leerMes()));
                 case SALIR -> terminar();
             }
             if (!resultado.isBlank()) {

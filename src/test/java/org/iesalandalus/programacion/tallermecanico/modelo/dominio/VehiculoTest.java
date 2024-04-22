@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VehiculoTest {
+class   	VehiculoTest {
 	
 	private static final String MARCA = "Renault";
 	private static final String MODELO = "Megane";
