@@ -2,7 +2,6 @@ package org.iesalandalus.programacion.tallermecanico.vista.texto;
 
 import org.iesalandalus.programacion.tallermecanico.vista.eventos.Evento;
 import org.iesalandalus.programacion.utilidades.Entrada;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -45,6 +44,7 @@ public class Consola {
 
     static float leerReal(String mensaje) {
         System.out.print(mensaje);
+
         return Entrada.real();
     }
 
@@ -63,6 +63,6 @@ public class Consola {
             fecha = null;
         }
         return fecha;
-    }
+    }}
 
-}
+
